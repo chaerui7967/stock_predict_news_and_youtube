@@ -83,3 +83,14 @@
 - 최종 목표 웹페이지 구성
 
 ![image-20210913171708177](md-images/image-20210913171708177.png)
+
+- 참고자료
+  - LSTM : 
+    - https://bziwnsizd.tistory.com/33
+    - https://teddylee777.github.io/tensorflow/lstm-stock-forecast
+  - 강화학습 : https://github.com/ZeroStrength/RL_tradingbot
+  - 시계열 ML : 
+    - https://byeongkijeong.github.io/ARIMA-with-Python/
+    - https://dinonotes.com/archives/2476
+    - https://dacon.io/codeshare/2570
+  
