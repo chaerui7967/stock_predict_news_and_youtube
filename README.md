@@ -85,6 +85,14 @@
 
 ![image-20210913171708177](md-images/image-20210913171708177.png)
 
+- 최종 완료 페이지
+
+![image-20211003113305661](md-images/image-20211003113305661.png)
+
+![image-20211003113325617](md-images/image-20211003113325617.png)
+
+
+
 - 참고자료
   - LSTM : 
     - https://bziwnsizd.tistory.com/33
@@ -94,4 +102,3 @@
     - https://byeongkijeong.github.io/ARIMA-with-Python/
     - https://dinonotes.com/archives/2476
     - https://dacon.io/codeshare/2570
-  
