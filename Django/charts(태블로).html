@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>주식 가격 변동예측 Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body id="page-top">
+<script>
+//     var agent_str = navigator.userAgent;
+//     console.log(agent_str);
+    var filter = "win16|win32|win64|mac|macintel"; 
+    if ( navigator.platform ) { 
+        if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 )
+   { 
+        //mobile
+        var device = 'mobile';
+    } else { //pc 
+        var device = 'pc';
+    } 
+    
+    }
+</script>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> Stock Prediction <sup>1</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="/index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>HOME</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="/samsung.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>삼성전자</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/sk_hynicx.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>SK하이닉스</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/lg_chem.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>LG화학</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/hyundai.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>현대차</span></a>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/celltrion.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>셀트리온</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Addons
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Tableau</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Tableau</h6>
+                    <a class="collapse-item" href="charts_fin.html">주가 Tableau</a>
+                    <div class="collapse-divider"></div>
+                    <a class="collapse-item" href="charts.html">분석 Tableau</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Charts</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="{% static 'img/undraw_rocket.svg' %}" alt="...">
+            <p class="text-center mb-2"><strong> 더 많은 주식 정보 </strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://finance.naver.com/">네이버 금융 !</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </nav>
+            
+        <script>
+            if(device=='mobile'){
+                document.write("<div class='tableauPlaceholder' id='viz1633506223393' style='position: relative'>");
+                document.write("<noscript>");
+                document.write("<a href='#'>");
+                document.write("<img alt='종목별 예측 가격 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_16334944207140&#47;_MOBI&#47;1_rss.png' style='border: none' />");
+                document.write("</a>");
+                document.write("</noscript>");
+                document.write("<object class='tableauViz'  style='display:none;'>");
+                document.write("<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> ");
+                document.write("<param name='embed_code_version' value='3' /> ");
+                document.write("<param name='name' value='_16334944207140&#47;_MOBI' />");
+                document.write("<param name='site_root' value='' />");
+                document.write("<param name='tabs' value='no' />");
+                document.write("<param name='toolbar' value='yes' />");
+                document.write("<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_16334944207140&#47;_MOBI&#47;1.png' />");
+                document.write("<param name='animate_transition' value='yes' />");
+                document.write("<param name='display_static_image' value='yes' />");
+                document.write("<param name='display_spinner' value='yes' />");
+                document.write("<param name='display_overlay' value='yes' />");
+                document.write("<param name='display_count' value='yes' />");
+                document.write("<param name='language' value='ko-KR' />");
+                document.write("</object>");
+                document.write("</div>");
+                document.write("<param name='display_count' value='yes' />");
+                document.write("<param name='language' value='ko-KR' />");
+                document.write("</object>");
+                document.write("</div>");
+                }
+         </script>
+         <script type='text/javascript'>
+                var divElement = document.getElementById('viz1633506223393');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+         </script>
+          <script>
+                
+            
+            if(device=='pc'){
+                document.write("<div class='tableauPlaceholder' id='viz1633508003613' style='position: relative'>");
+                document.write("<noscript>");
+                document.write("<a href='#'>");
+                document.write("<img alt='종목별 예측 가격 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;7Z&#47;7Z6YK3HCC&#47;1_rss.png' style='border: none' />");
+                document.write("</a>");
+                document.write("</noscript>");
+                document.write("<object class='tableauViz'  style='display:none;'>");
+                document.write("<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> ");
+                document.write("<param name='embed_code_version' value='3' /> ");
+                document.write("<param name='name' value='_16334944207140&#47;_MOBI' />");
+                document.write(" <param name='path' value='shared&#47;7Z6YK3HCC' />");
+                document.write("<param name='toolbar' value='yes' />");
+                document.write("<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;7Z&#47;7Z6YK3HCC&#47;1.png' />");
+                document.write("<param name='animate_transition' value='yes' />");
+                document.write("<param name='display_static_image' value='yes' />");
+                document.write("<param name='display_spinner' value='yes' />");
+                document.write("<param name='display_overlay' value='yes' />");
+                document.write("<param name='display_count' value='yes' />");
+                document.write("<param name='language' value='ko-KR' />");
+                document.write("</object>");
+                document.write("</div>");
+                document.write("<param name='display_count' value='yes' />");
+                document.write("<param name='language' value='ko-KR' />");
+                document.write("</object>");
+                document.write("</div>");
+            }
+              
+        </script>
+          <script type='text/javascript'>                    var divElement = document.getElementById('viz1633508003613');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        
+        </div>
+        <!-- Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        
+ 
+<!-- Logout Modal-->
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+
+</body>
+
+</div>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 업 빛 투 2021</span>
+        </div>
+    </div>
+</footer>
+
+</html>
