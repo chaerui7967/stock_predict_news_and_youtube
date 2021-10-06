@@ -1,0 +1,464 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>주식 가격 변동예측 Dashboard</title>
+
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+<body id="page-top">
+
+<div id="wrapper">
+
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> Stock Prediction <sup>1</sup></div>
+        </a>
+
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item active">
+            <a class="nav-link" href="/index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>HOME</span></a>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- 내비게이션 바 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/samsung.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>삼성전자</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/sk_hynicx.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>SK하이닉스</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/lg_chem.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>LG화학</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/hyundai.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>현대차</span></a>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/celltrion.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>셀트리온</span></a>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Addons
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Tableau</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Tableau</h6>
+                    <a class="collapse-item" href="charts_fin.html">주가 Tableau</a>
+                    <div class="collapse-divider"></div>
+                    <a class="collapse-item" href="charts.html">분석 Tableau</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Charts</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="{% static 'img/undraw_rocket.svg' %}" alt="...">
+            <p class="text-center mb-2"><strong> 더 많은 주식 정보 </strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://finance.naver.com/">네이버 금융 !</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Content Row -->
+				
+				<!--  1. 상단  -->
+                <div class="row">
+				<!--  종목 별 뉴스 표시   -->
+                    <script type="text/javascript">
+                            var news = JSON.parse("{{ newsJSON|escapejs }}")
+                                for ( var i=0; i<news.length ; i++) {
+                                document.write('<div class="col-xl-2 col-md-6 mb-4">')
+                                if(news[i]['st_n'] == '하이닉스'){
+                                    document.write("<div class='card border-left-primary shadow h-100 py-2'>");
+                                }else if(news[i]['st_n'] == '현대차'){
+                                    document.write('<div class="card border-left-success shadow h-100 py-2">');
+                                }else if(news[i]['st_n'] == '삼성전자'){
+                                    document.write('<div class="card border-left-info shadow h-100 py-2">');
+                                }else if(news[i]['st_n'] == 'LG화학'){
+                                    document.write('<div class="card border-left-warning shadow h-100 py-2">');
+                                }else{
+                                    document.write('<div class="card border-left-danger shadow h-100 py-2">');
+                                }
+                                document.write("<div class='card-body font-weight-bold text-primary'>");
+                                document.write('<a target="_blank" rel="nofollow" href="'+news[i]['url']+'">')
+                                document.write(news[i]['st_n'])
+                                document.write("<br>")
+                                document.write("<div class='row no-gutters align-items-center'>");
+                                document.write("<div class='col mr-2'>");
+                                document.write("<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>");
+                                document.write(news[i]['datetime'].substr(0,4)+'-'+news[i]['datetime'].substr(4,2)+'-'+news[i]['datetime'].substr(6,2));
+                                document.write("<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>");
+                                document.write('뉴스 바로가기&rarr;')
+                                document.write("</div>")
+                                document.write("<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>");
+                                document.write('<div class="h6 mb-2 font-weight-bold text-gray-800">');
+                                document.write(news[i]['title'])
+                                document.write("</div>")
+                                document.write("</div>")
+                                document.write("</div>")
+                                document.write("</div>")
+                                document.write("</div>")
+                                document.write("</a>")
+                                document.write("</div>")
+                                document.write("</div>")
+                                document.write("</div>")
+			                }
+                        </script>
+                </div>
+				<!--  2. 코스피 지수   -->
+
+                <div class="row">
+
+					<!--  코스피 지수   -->
+                    <div class="col-xl-9 col-lg-10">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">코스피 (KOSPI)</h6>
+                                <a hide="Treu" href="#" role="button" id="datasearch" onclick="datasearch({{finacedataJSON}})"></a>
+
+                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                    <a hide="Treu" href="{% url 'index' %}" role="button" id="all_years">
+                                        <h6 class="mx-2 font-weight-bold text-primary">2018~현재</h6>
+                                    </a>
+                                    <a hide="Treu" href="{% url 'result' yearid=2021 %}" role="button">
+                                        <h6 class="mx-2 font-weight-bold text-primary">2021</h6>
+                                    </a>
+                                    <a hide="Treu" href="{% url 'result' yearid=2020 %}" role="button">
+                                        <h6 class="mx-2 font-weight-bold text-primary">2020</h6>
+                                    </a>
+                                    <a hide="Treu" href="{% url 'result' yearid=2019 %}" role="button">
+                                        <h6 class="mx-2 font-weight-bold text-primary">2019</h6>
+                                    </a>
+                                    <a hide="Treu" href="{% url 'result' yearid=2018 %}" role="button">
+                                        <h6 class="mx-2 font-weight-bold text-primary active">2018</h6>
+                                    </a>
+
+
+                                </div>
+                                <div>
+                                    {{context}}
+                                </div>
+
+
+                                <div class="dropdown no-arrow">
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <script type="text/javascript">
+                        var accuracy = JSON.parse("{{ accuracyJson|escapejs }}")
+                    </script>
+
+                    <div class="col-xl-3 col-lg-3">
+                        <div class="card shadow mb-5">
+                            <div class="card shadow mb-1">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">언론사 별 긍정 확률</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="small font-weight-bold">매일경제 <span
+                                            class="float-right">
+                                            <script>
+                                                document.write(accuracy[0]['maeil']);
+
+                                            </script>
+                                        </span>
+                                    </h4>
+                                    <div class="progress mb-4">
+                                        <div id="maeil_accuracy" class="progress-bar bg-danger" role="progressbar" style="width: 40%"
+                                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">아시아경제 <span
+                                            class="float-right">
+                                            <script>
+                                                document.write(accuracy[0]['asia']);
+                                            </script>
+                                            </span></h4>
+                                    <div class="progress mb-4">
+                                        <div id="asia_accuracy" class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Youtube 슈카월드 <span
+                                            class="float-right">
+                                            <script>
+                                                document.write(accuracy[0]['suka'])
+                                            </script>
+                                            </span></h4>
+                                    <div class="progress mb-4">
+                                        <div id="suka_accuracy" class="progress-bar" role="progressbar" style="width: 60%"
+                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Youtube 한국경제TV <span
+                                            class="float-right">
+                                            <script>
+                                                document.write(accuracy[0]['hk'])
+                                            </script>
+                                            </span></h4>
+                                    <div class="progress mb-4">
+                                        <div id="hk_accuracy" class="progress-bar bg-info" role="progressbar" style="width: 100%"
+                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Youtube 삼프로 <span
+                                            class="float-right">
+                                            <script>
+                                                document.write(accuracy[0]['sampro'])
+                                            </script>
+                                            </span></h4>
+                                    <div class="progress">
+                                        <div id="sampro_accuracy" class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                             aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-9 col-lg-11" style="height: auto;">
+                        <div class="card shadow mb-6">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary"> 오늘의 이슈 30선 </h6>
+                                기준일 :
+                                <script>
+                                    var dates = JSON.parse("{{ dates|escapejs }}");
+                                    document.write(dates[0]['date'].substr(0,4)+'-'+dates[0]['date'].substr(4,2)+'-'+dates[0]['date'].substr(6,2));
+                                </script>
+                            </div>
+                            <div class="card-body" >
+                                <div class="text-center" >
+                                    <div id="container" style="hieght:100%"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Content Row -->
+                <div class="row">
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 업 빛 투 2021</span>
+        </div>
+    </div>
+</footer>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+
+<!-- 코스피 지수 표시  -->
+<script>
+        $(document).ready(function(){
+            document.getElementById('datasearch').click();
+            document.getElementById('datasearch').style.display = 'none';
+        });
+    </script>
+<script type="text/javascript" >
+    var news = JSON.parse("{{ newsJSON|escapejs }}")
+
+<!--    Accuracy bar 크기 변경-->
+    document.getElementById("maeil_accuracy").style.width = accuracy[0]['maeil']+'%';
+    document.getElementById("asia_accuracy").style.width = accuracy[0]['asia']+'%';
+    document.getElementById("suka_accuracy").style.width = accuracy[0]['suka']+'%';
+    document.getElementById("hk_accuracy").style.width = accuracy[0]['hk']+'%';
+    document.getElementById("sampro_accuracy").style.width = accuracy[0]['sampro']+'%';
+
+
+</script>
+
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-tag-cloud.min.js"></script>
+
+<!--  워드 클라우드 값 표시   -->
+<script>
+    var wordcloud = JSON.parse("{{ wordcloudJSON|escapejs }}")
+
+    var categorys = [];
+    categorys[0]="Sino-Tibetan";
+    categorys[1]="Indo-European";
+    categorys[2]="Indo-European";
+    categorys[3]="Sino-Tibetan";
+    categorys[4]="Afro-Asiatic";
+
+
+    anychart.onDocumentReady(function ()
+    {
+    var data = [];
+    var category =''
+    const keys = Object.keys(wordcloud)
+
+    for(key in wordcloud){
+
+        if(keys.indexOf(key)<=5){
+            category= categorys[0]
+        }else if(keys.indexOf(key)<=10){
+            category= categorys[1]
+        }else if(keys.indexOf(key)<=20){
+            category= categorys[2]
+        }else if(keys.indexOf(key)<=30){
+            category= categorys[3]
+        }else{
+            category= categorys[4]
+        }
+
+    data.push({"x": key, "value": wordcloud[key], category:category});
+
+
+    };
+    // create a chart
+    chart = anychart.tagCloud();
+
+    // configure angles
+    chart.angles([0]);
+
+    // set the parsing mode
+    chart.data(data, {mode: "by-word"});
+
+    // set the container id
+    chart.container("container");
+
+    // initiate drawing the chart
+    chart.draw();
+    });
+
+</script>
+
+</body>
+
+</html>
