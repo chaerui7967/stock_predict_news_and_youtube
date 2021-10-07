@@ -1,0 +1,688 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>주식 가격 변동예측 Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"> Stock Prediction <sup>1</sup></div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="/index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>HOME</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="/samsung.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>삼성전자</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/sk_hynicx.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>SK하이닉스</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/lg_chem.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>LG화학</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/hyundai.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>현대차</span></a>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/celltrion.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>셀트리온</span></a>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+<!--        <div class="sidebar-heading">-->
+<!--            Addons-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Nav Item - Pages Collapse Menu &ndash;&gt;-->
+<!--        <li class="nav-item">-->
+<!--            aria-expanded="true" aria-controls="collapsePages">-->
+<!--            <i class="fas fa-fw fa-folder"></i>-->
+
+<!--            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
+<!--                <div class="bg-white py-2 collapse-inner rounded">-->
+<!--                    <h6 class="collapse-header">Login Screens:</h6>-->
+<!--                    <a class="collapse-item" href="login.html">Login</a>-->
+<!--                    <a class="collapse-item" href="register.html">Register</a>-->
+<!--                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>-->
+<!--                    <div class="collapse-divider"></div>-->
+<!--                    <h6 class="collapse-header">Other Pages:</h6>-->
+<!--                    <a class="collapse-item" href="404.html">404 Page</a>-->
+<!--                    <a class="collapse-item" href="blank.html">Blank Page</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </li>-->
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item active">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Charts</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="{% static 'img/undraw_rocket.svg' %}" alt="...">
+            <p class="text-center mb-2"><strong> 더 많은 주식 정보 </strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://finance.naver.com/">네이버 금융 !</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                               aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                           placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <!-- Counter - Messages -->
+                            <span class="badge badge-danger badge-counter">7</span>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="{% static'img/undraw_profile_1.svg'% }"
+                                         alt="...">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                        problem I've been having.</div>
+                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="{% static 'img/undraw_profile_2.svg' %}"
+                                         alt="...">
+                                    <div class="status-indicator"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">I have the photos that you ordered last month, how
+                                        would you like them sent to you?</div>
+                                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="{% static 'img/undraw_profile_3.svg' %}"
+                                         alt="...">
+                                    <div class="status-indicator bg-warning"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Last month's report looks great, I am very happy with
+                                        the progress so far, keep up the good work!</div>
+                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                         alt="...">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                        told me that people say this to all dogs, even if they aren't good...</div>
+                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <img class="img-profile rounded-circle"
+                                 src="{% static 'img/undraw_profile.svg' %}">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+
+                <!-- Content Row -->
+                <div class="row">
+                    <script type="text/javascript">
+                        var news = JSON.parse("{{ datefinacedataJSON|escapejs }}")
+
+                    </script>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                     <!-- Pendng Requests Card Example -->
+<!--                    <div class="col-xl-4 col-md-6 mb-4">-->
+<!--                        <div class="card border-left-warning shadow h-100 py-2">-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="row no-gutters align-items-center">-->
+<!--                                    <div class="col mr-2">-->
+<!--                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">-->
+<!--                                            관련뉴스</div>-->
+<!--                                        <div class="h5 mb-0 font-weight-bold text-gray-800"></div>-->
+<!--                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">-->
+<!--                                            <script>-->
+<!--                                                var news_script= JSON.parse("{{ newsJSON|escapejs }}")-->
+<!--                                            </script>-->
+<!--                                            <div class="h6 mb-2 font-weight-bold text-gray-800">-->
+<!--                                                <script>-->
+<!--                                                    document.write(news_script[0]['title'])-->
+<!--                                                </script>-->
+<!--                                            </div>-->
+<!--                                            <script>-->
+<!--                                                        document.write('<a target="_blank" rel="nofollow" href="'+news_script[0]['url']+'">')-->
+<!--                                                        document.write('뉴스 바로가기&rarr;')-->
+<!--                                                        document.write('</a>')-->
+<!--                                                </script>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-comments fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+
+                 <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">태블로(Tableau)</h1>
+                    <p class="mb-4">태블로를 통한 시각화를 보여주는~~~ </a></p>
+
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+<div class='tableauPlaceholder' id='viz1633160988110' style='position: relative'><noscript><a href='#'><img alt='스토리 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_1_16330531308410&#47;2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='_1_16330531308410&#47;2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_1_16330531308410&#47;2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='ko-KR' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1633160988110');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+</div>
+<!-- End of Content Wrapper->
+
+</div>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 업 빛 투 2021</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+<script>
+
+        $(document).ready(function(){
+
+            document.getElementById('datasearch').click();
+            document.getElementById('datasearch').style.display = 'none';
+        });
+        // <!--    Accuracy bar 크기 변경-->
+    document.getElementById("maeil_accuracy").style.width = accuracy[0]['Ratio']+'%';
+    document.getElementById("asia_accuracy").style.width = accuracy[1]['Ratio']+'%';
+    document.getElementById("LSTM").style.width = analysisJSON['lstm']+'%';
+    document.getElementById("ARIMA").style.width = analysisJSON['arima']+'%';
+    document.getElementById("fbprophet").style.width = analysisJSON['fbprophet']+'%';
+    document.getElementById("RL").style.width = analysisJSON['RL']+'%';
+</script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-tag-cloud.min.js"></script>
+<!--<script src="{% static 'js/anychart-tag-cloud.min.js' %}"></script>-->
+<!--<script src="{% static 'js/anychart-core.min.js' %}"></script>-->
+<script type="text/javascript">
+    function getIP(json) {
+        var ip = json.ip;
+        document.getElementById("ip").value=json.ip;
+        }
+
+</script>
+
+<script type="text/javascript">
+var ip;
+function getIP(json) {
+    var ip = json.ip;
+    $(document).ready(function(){
+        $.ajax({
+            type:"GET",
+            data : {'ip':ip},
+            dataType: "json",
+        })
+    });
+     $("#like_maeil").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+
+            data : {'ip':ip,'like':1,'news':'매일경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('매일경제 긍정 클릭');
+            }
+            })
+        })
+        $("#bad_maeil").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+
+            data : {'ip':ip,'like':0,'news':'매일경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('매일경제 부정 클릭');
+
+            }
+            })
+        })
+        $("#soso_maeil").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+            data : {'ip':ip,'like':0.5,'news':'매일경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('매일경제 중립 클릭');
+
+            }
+            })
+        })
+
+     $("#like_asia").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+
+            data : {'ip':ip,'like':1,'news':'아시아경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('아시아경제 긍정 클릭');
+            }
+            })
+        })
+        $("#bad_asia").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+
+            data : {'ip':ip,'like':0,'news':'아시아경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('아시아경제 부정 클릭')
+
+            }
+            })
+        })
+        $("#soso_asia").click(function(){
+        var ip = json.ip;
+        $.ajax({
+            type:"GET",
+            url:"{% url 'samsung_chk' %}",
+            data : {'ip':ip,'like':0.5,'news':'아시아경제','st_n':'5930'},
+            dataType: "json",
+            success:function(){
+
+            },error:function(){
+                swal('아시아경제 중릭 클릭');
+
+            }
+            })
+        })
+}
+
+</script>
+
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+<script>
+    var wordcloud = JSON.parse("{{ wordcloudJSON|escapejs }}")
+
+<!--    for (key in wordcloud){-->
+
+<!--    }-->
+    var categorys = [];
+    categorys[0]="Sino-Tibetan";
+    categorys[1]="Indo-European";
+    categorys[2]="Indo-European";
+    categorys[3]="Sino-Tibetan";
+    categorys[4]="Afro-Asiatic";
+
+
+    anychart.onDocumentReady(function ()
+    {
+    var data = [];
+    var category =''
+    const keys = Object.keys(wordcloud)
+
+    for(key in wordcloud){
+keys.indexOf(key)
+<!--        if(wordcloud[key]<=5){-->
+<!--            category= categorys[0]-->
+<!--        }else if(wordcloud[key]<=10){-->
+<!--            category= categorys[1]-->
+<!--        }else if(wordcloud[key]<=20){-->
+<!--            category= categorys[2]-->
+<!--        }else if(wordcloud[key]<=30){-->
+<!--            category= categorys[3]-->
+<!--        }else{-->
+<!--            category= categorys[4]-->
+<!--        }-->
+
+        if(keys.indexOf(key)<=5){
+            category= categorys[0]
+        }else if(keys.indexOf(key)<=10){
+            category= categorys[1]
+        }else if(keys.indexOf(key)<=20){
+            category= categorys[2]
+        }else if(keys.indexOf(key)<=30){
+            category= categorys[3]
+        }else{
+            category= categorys[4]
+        }
+
+    data.push({"x": key, "value": wordcloud[key], category:category});
+
+
+    };
+    // create a chart
+    chart = anychart.tagCloud();
+
+    // configure angles
+    chart.angles([0]);
+
+    // set the parsing mode
+    chart.data(data, {mode: "by-word"});
+
+    // set the container id
+    chart.container("container");
+
+    // initiate drawing the chart
+    chart.draw();
+    });
+
+</script>
+</body>
+
+</div>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; 업 빛 투 2021</span>
+        </div>
+    </div>
+</footer>
+
+</html>
